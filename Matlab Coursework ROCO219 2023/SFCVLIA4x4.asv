@@ -34,31 +34,26 @@ for idx = 1:len
 
     %these are the 2 angualr states of the cart
    
-    %this is the estimate
     xhat(1) = xhat(1) + h * xDot(1);
     xhat(2) = xhat(2) + h * xDot(2);
 
-    %this is the real system 
-    x(1) = x(1) + h * xDot(1);
-    x(2) = x(2) + h * xDot(2);
 
+    %observer correction 
     
-
 
 
 
     %there are no observers for these as this are not in the observer
-    
     %this is used to find the cart position 
-    x(3) = x(3) + h * xDot(3);
+    %x(3) = x(3) + h * xDot(3);
     %this will be used to find the positional error state
-    x(4) = x(4) + h * xDot(4);
+    %x(4) = x(4) + h * xDot(4);
 
 
     % record the state
     xout(:, idx) = xhat;
 
-    %tout(:, idx) = t;
+    tout(:, idx) = t;
 
     %this is the output of the system
     %yhat = C * xhat + D * u;

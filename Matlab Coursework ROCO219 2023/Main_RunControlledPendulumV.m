@@ -32,17 +32,7 @@ c = GetStateSpaceCoesffs(wantDefault, params);
 
 %this is just a check can be removed later 
 ssmP = GetSSModel4x4V(params,c);
-disp('ssmP.A')
-disp(ssmP.A)
-disp(' ')
-disp('ssmP.B')
-disp(ssmP.B)
-disp(' ')
-disp('ssmP.C')
-disp(ssmP.C)
-disp(' ')
-disp('ssmP.D')
-disp(ssmP.D)
+
 
 
 
@@ -50,9 +40,6 @@ disp(ssmP.D)
 PX = [-10 -11];
 L = place(ssmP.AObserve, ssmP.CObserve', PX);
 
-disp(' ')
-disp('L')
-disp(L)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % for state space model with thetaDot, theta and  position of cart
@@ -63,9 +50,6 @@ disp(L)
 K = place(ssmP.A,ssmP.B,[-10 -11 -12 -14]);
 
 
-disp(' ')
-disp('K')
-disp(K)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % setup time points
@@ -88,17 +72,17 @@ kickFlag=[];
 
 
 % every sub-loop randomly perturb intial condition
-for kick=1:3 %3 might change 
+for kick=1:3  
         
     % for each run randomly perturb intial condition
     x0 = [0; 1 * (rand - 0.5); ]; %this add some kind of force to try and push the pendulum over 
     
     % run Euler integration
-    [t, x] = SFCVLIA4x4(VCPendDotCB, a1, a2, b0, A, B, C, D, Ahat, K, L, t, xhat, maxSpeed);
+    [yhat,tout,xhat] = SFCVLIA4x4(VCPendDotCB, a1, a2, b0, A, B, C, D, Ahat, K, L, t, xhat, maxSpeed);
 
 
     % get time
-    newTime = (kick-1) * t(end) + t;
+    newTime = (kick-1) * tout(end) + tout;
     
     % just show kick arrow for short time after kick
     frames = length(t);
@@ -125,8 +109,8 @@ PlotStateVariable2x2(xData, tData, titleMessage);
 figure
 range=1;
 
-% cart not moving so set distance to zero
-distance = zeros( size(xData(1, :)));
+% this is used to set the cart position 
+distance =  size(xhat(3, :));
 
 % use animate function
 step = 5;
