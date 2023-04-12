@@ -23,6 +23,7 @@ c = GetStateSpaceCoesffs(wantDefault, params);
 % get state space model with thetaDot, theta
 %this is the old model 
 
+
 % get state space model with thetaDot, theta and  position of cart
 % integral action on position
 
@@ -38,7 +39,7 @@ ssmP = GetSSModel4x4V(params,c);
 
 % put your code for calculating L here
 PX = [-10 -11];
-L = place(ssmP.AObserve, ssmP.CObserve', PX);
+L = place(ssmP.Ahat, ssmP.Chat', PX);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -77,8 +78,8 @@ for kick=1:3
     % for each run randomly perturb intial condition
     x0 = [0; 1 * (rand - 0.5); ]; %this add some kind of force to try and push the pendulum over 
     
-    % run Euler integration
-    [yhat,tout,xhat] = SFCVLIA4x4(VCPendDotCB, a1, a2, b0, A, B, C, D, Ahat, K, L, t, xhat, maxSpeed);
+    % run Euler integration this is the simulation
+    [yhat,tout,xhat] = SFCVLIA4x4(VCPendDotCB, a1, a2, b0, A, B, C, D, K, L, t, xhat, maxSpeed);
 
 
     % get time
@@ -97,8 +98,9 @@ for kick=1:3
     
     % concatenate data between runs
     tData = [tData newTime];
-    xData = [xData x];
+    xData = [xData xhat];
     kickFlag = [kickFlag kickFlagK];
+    yData = [yData yhat];
 end
 
 % add plot and animation here
@@ -114,7 +116,7 @@ distance =  size(xhat(3, :));
 
 % use animate function
 step = 5;
-AnimatePendulumCart( (xData(1, :) + pi),  distance, 0.6, tData, range, kickFlag, step, titleMessage);
+AnimatePendulumCart( xData(3, :),  xData(1, :), ((params.lh)*2), tData, range, kickFlag, step, titleMessage);
 
     
 

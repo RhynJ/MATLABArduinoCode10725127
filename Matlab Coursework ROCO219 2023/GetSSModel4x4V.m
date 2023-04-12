@@ -15,10 +15,10 @@ function ssmP = GetSSModel4x4(params, c)
 
 
 % only observer gain
-    ssmP.AObserve = [0 1; -c.a2 -c.a1;];   
-    ssmP.BObserve = [c.b0; -(c.a1)*(c.b0);];   
-    ssmP.CObserve = [1 0;];
-    ssmP.DObserve = 0;
+    ssmP.Ahat = [0 1; -c.a2 -c.a1;];   
+    ssmP.Bhat = [c.b0; -(c.a1)*(c.b0);];   
+    ssmP.Chat = [1 0;];
+    ssmP.Dhat = 0;
 
 
 

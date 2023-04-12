@@ -40,6 +40,8 @@ for idx = 1:len
       
     % record the state
     xout(:, idx) = x;
+
+    
         
 end
 
