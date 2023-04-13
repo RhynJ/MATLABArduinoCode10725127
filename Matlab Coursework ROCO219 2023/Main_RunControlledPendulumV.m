@@ -32,14 +32,14 @@ c = GetStateSpaceCoesffs(wantDefault, params);
 % calculate observer gain L here
 
 %this is just a check can be removed later 
-ssmP = GetSSModel4x4V(params,c);
+ssmP = GetSSModel4x4V(c);
 
 
 
 
 % put your code for calculating L here
-PX = [-10 -11];
-L = place(ssmP.Ahat, ssmP.Chat', PX);
+PX = [-10 -11 -12 -13];
+L = place(ssmP.A, ssmP.C', PX');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -60,7 +60,7 @@ t = 0:dt:Tfinal;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-titleMessage = 'NLSimulateVelSFCLArduino4x4 partial observer Arduino';
+titleMessage = 'NLSimulateVelSFCLArduino4x4 partial observer Arduino: 10725127';
 disp(titleMessage)
 
 % you can base this on the code in Main_RunDemoUncontrollerPendulumV.m
@@ -76,10 +76,10 @@ kickFlag=[];
 for kick=1:3  
         
     % for each run randomly perturb intial condition
-    x0 = [0; 1 * (rand - 0.5); ]; %this add some kind of force to try and push the pendulum over 
-    
+    x0 = [rand * 2 - 1; rand * 2 - 1; pi; rand * 2 - 1;]; %this add some kind of force to try and push the pendulum over 
+
     % run Euler integration this is the simulation
-    [yhat,tout,xhat] = SFCVLIA4x4(VCPendDotCB, a1, a2, b0, A, B, C, D, K, L, t, xhat, maxSpeed);
+    [tout,xout] = SFCVLIA4x4(K, L, t, x0, ssmP);
 
 
     % get time
@@ -98,21 +98,22 @@ for kick=1:3
     
     % concatenate data between runs
     tData = [tData newTime];
-    xData = [xData xhat];
+    yData = [yData yout];
+    xData = [xData xout];
     kickFlag = [kickFlag kickFlagK];
-    yData = [yData yhat];
+   
 end
 
 % add plot and animation here
 % plot out the state variables
-PlotStateVariable2x2(xData, tData, titleMessage);
+PlotStateVariable4x4(xData, tData, titleMessage);
 
 % for all time point animate the results
 figure
 range=1;
 
 % this is used to set the cart position 
-distance =  size(xhat(3, :));
+distance =  size(xdata(3, :));
 
 % use animate function
 step = 5;

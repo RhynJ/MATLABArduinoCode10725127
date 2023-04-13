@@ -25,10 +25,10 @@ else
 
     % put in approriate values here
     params.m = 0.64;
-    params.lh = 0.32;
-    params.g = 9.81;
+    params.l = 0.64;
+    params.g = -9.81;
     params.mu = 0.05;
-    params.I = (1/3)*(params.m)*(params.lh^(2));   
+    params.I = (1/3)*(params.m)*(params.l^(2));   
     
 end
 
