@@ -1,4 +1,4 @@
-function [dx, dxHat] = intergration(ssmP,K,L,x, xhat)
+function [xDot, xhatDot] = intergration(ssmP,K,L,x, xhat)
 
 
 A = ssmP.A; 
@@ -22,8 +22,8 @@ Mo = rank(observ);
 %calc the output 
 %y = X(c-DK)
 %there is no D matrix
-y = x * C;
-yHat = xhat * C;
+y = C * x(1:4);
+yHat =  C * xhat(1:4);
 
 %what we want the system to do
 target = [0; 0; pi; 0]; %we want everything to tend to 0 appart from the pendulum angle
@@ -33,7 +33,7 @@ Kp = place(A, B, [-4 -5 -6 -7]);
 
 
 %this is the 2 gains 
-u = -K*(xHat(1:4) - target) - Kp*(x(1:4) - target); % -K*(Xe)
+u = -K*(x(1:4) - target) - Kp*(xhat(1:4) - target); % -K*(Xe)
 
 % using the real states (just for comparison)
 dx = A*x(1:4) + B*u;
@@ -41,10 +41,10 @@ dx = A*x(1:4) + B*u;
 % using the estimate states
 % dx = Ax + Bu + L(y - yhat)
 % L(y - yhat) = L(output - output estimate)
-dxhat = A*xHat(5:8) + B*u + L*(y - yHat);
+dxhatE = A*xhat(1:4) + B*u + L'*(y - yHat);
 
-dx = [dx; dxhat]; %store the new dx for both the real and simulated 
-dxHat = dxhat;
+xDot = dx; %store the new dx for both the real and simulated 
+xhatDot = dxhatE; %this is the estimated value 
 
 end
 

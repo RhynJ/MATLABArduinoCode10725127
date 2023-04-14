@@ -1,4 +1,4 @@
-function [tout,xout] = SFCVLIA4x4(K, L, t, x0, ssmP)
+function [tout,xout, xHatOut] = SFCVLIA4x4(K, L, t, x0, ssmP)
 % nonlinear simulate state space model using C-language compatible formuation
 % add real task pendulum code here
 
@@ -8,11 +8,13 @@ len = length(t) -1;
 
 % init output
 xout = zeros(4,len); % there are 4 state 
+xHatOut = zeros(4,len);
 
 % record the initial state
 
 
 xout(:, 1) = x0;
+xHatOut(:, 1) = x0;
 xhat = x0;
 x = x0;
 
@@ -47,6 +49,7 @@ for idx = 1:len
 
 
     xout(:, idx) = x;
+    XHatOut(:, idx) = xhat;
 
        
         

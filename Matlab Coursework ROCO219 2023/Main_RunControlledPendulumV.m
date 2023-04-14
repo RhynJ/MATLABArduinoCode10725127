@@ -17,15 +17,20 @@ wantDefault = 0;
 params = GetRodPendulumParams(wantDefault, 5);
 
 
+
 % this will get the new state space coefficients
 c = GetStateSpaceCoesffs(wantDefault, params);
 
+
 % get state space model with thetaDot, theta
 %this is the old model 
-
+ssm = GetSSModel2x2V(wantDefault, c);
 
 % get state space model with thetaDot, theta and  position of cart
 % integral action on position
+%ssmP = GetSSModel4x4V(c);
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % build observer just for angle and angular velocity states
@@ -69,6 +74,7 @@ disp(titleMessage)
 xData = [];
 yData=[];
 tData=[];
+xDataEst=[];
 kickFlag=[];
 
 
@@ -79,7 +85,7 @@ for kick=1:3
     x0 = [rand * 2 - 1; rand * 2 - 1; pi; rand * 2 - 1;]; %this add some kind of force to try and push the pendulum over 
 
     % run Euler integration this is the simulation
-    [tout,xout] = SFCVLIA4x4(K, L, t, x0, ssmP);
+    [tout,xout, xHatOut] = SFCVLIA4x4(K, L, t, x0, ssmP);
 
 
     % get time
@@ -98,26 +104,32 @@ for kick=1:3
     
     % concatenate data between runs
     tData = [tData newTime];
-    yData = [yData yout];
     xData = [xData xout];
+    xDataEst = [xDataEst xHatOut];
     kickFlag = [kickFlag kickFlagK];
    
 end
 
-% add plot and animation here
-% plot out the state variables
-PlotStateVariable4x4(xData, tData, titleMessage);
 
 % for all time point animate the results
 figure
 range=1;
 
 % this is used to set the cart position 
-distance =  size(xdata(3, :));
+%distance =  size(xdata(3, :));
 
 % use animate function
 step = 5;
-AnimatePendulumCart( xData(3, :),  xData(1, :), ((params.lh)*2), tData, range, kickFlag, step, titleMessage);
+AnimatePendulumCart( xData(3, :),  xData(1, :), ((params.l)), tData, range, kickFlag, step, titleMessage);
 
-    
+
+% Plotting states
+PlotStateVariable4x4(xData(1,:),xDataEst(1,:),xData(2,:),xDataEst(2,:),xData(3,:),xDataEst(3,:),xData(4,:),xDataEst(4,:),tData);
+
+
+
+
+
+
+
 
