@@ -38,8 +38,6 @@ for idx = 1:len
     x(3) = x(3) + h * xDot(3);    %this is used to find the cart position
     x(4) = x(4) + h * xDot(4);    %this will be used to find the positional error state
 
-
-
     %this is the simulated pen 
     xhat(1) = xhat(1) + h * xhatDot(1);
     xhat(2) = xhat(2) + h * xhatDot(2);
@@ -49,7 +47,7 @@ for idx = 1:len
 
 
     xout(:, idx) = x;
-    XHatOut(:, idx) = xhat;
+    xHatOut(:, idx) = xhat;
 
        
         
