@@ -34,8 +34,10 @@
 #include <stdlib.h>
 #include "CSFCROCO219.h"
 
-unsigned long currentTime = 0;
-unsigned long previousTime = 0;
+
+
+
+vector<double> u(4);
 
 ////////////////////////////////////////////////////////////////
 // construction passes system matrices, SFC and observer gains, as well as the setpoint location
@@ -97,32 +99,37 @@ double CSFCROCO219::ComputeSFC(double y, unsigned long theTime)
 {
   // control value - stepper motor speed
   double   u = 0;
+  double ymcn;
   
   // PUT YOUR OWN ComputeSFC FUNCTIONALITY IN HERE
 
   // Calculate time since last update
   double h = (double)(theTime - lastTime) / 1000.0;
 
-  // compute control variable u
+  // compute control variable u 
+  //u = -K*(xhat(1:4) - target) - Kp*(x(1:4) - target); % -K*(Xe)
+  double uEstimate = -(xhat[0] * K[0] - target[0]) - (xhat[1] * K[1] - target[1]) -  (xhat[2] * K[2] - target[2]) -(xhat[3] * K[3] - target[3]); 
+  double uReal = -(x[0] * Kp[0] - target[0]) - (x[1] * Kp[1] - target[1]) -  (x[2] * Kp[2] - target[2]) -(x[3] * Kp[3] - target[3])
+  u =  uEstimate + uReal;
+
   
   
-  //u = -K*(x(1:4) - target) - Kp*(xhat(1:4) - target); % -K*(Xe)
-;
-
-
   // calculate observer correction term
-
-
+    
+  ymcn = (y - setPointAngle) - C[0] * xhat[0] - C[1] * xhat[1] - C[2] * xhat[2] - C[3] * xhat[3] ;
+ 
 
   // update the state estimates for xHat
 
+  xhat[0] +=  h * (A[0][0] * xhat[0] + A[0][1] * xhat[1] + B[0] * u + L[0] * ymcn );
+  xhat[1] +=  h * (A[1][0] * xhat[0] + A[1][1] * xhat[1] + B[1] * u + L[1] * ymcn );
+  xhat[2] +=  h * (A[2][0] * xhat[0] + A[2][1] * xhat[1] + B[2] * u + L[2] * ymcn );
+  xhat[3] +=  h * (A[3][0] * xhat[0] + A[3][1] * xhat[1] + B[3] * u + L[3] * ymcn );
 
 
   // use control velocity from input to update position of cart
 
-
-
-
+  xhat[2] +=  h * (B[2] * u  );
 
 
   // compute integral action positional error state update
@@ -130,6 +137,8 @@ double CSFCROCO219::ComputeSFC(double y, unsigned long theTime)
 
 
   // record variables
+
+  lastTime = theTime;
 
   // return motor command
  return (u);

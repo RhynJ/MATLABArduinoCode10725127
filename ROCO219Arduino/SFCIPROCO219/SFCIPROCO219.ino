@@ -8,17 +8,6 @@
 // Uses TimerOne PWM Pins Arduino Mega  11, 12, 13
 // Uses Arduino Mega Interrupt pins: 2, 3, 18, 19, 20, 21
 ///////////////////////////////////////////////////////////////
-// Author: Dr. Ian Howard
-// Associate Professor (Senior Lecturer) in Computational Neuroscience
-// Centre for Robotics and Neural Systems 
-// Plymouth University
-// A324 Portland Square
-// PL4 8AA
-// Plymouth,  Devon, UK
-// howardlab.com
-// 08/07/2017
-
-//////////////////////////////////////////////////
 
 // Include stepper class to achieve velocity control of stepper motor
 #include "CStepper.h"
@@ -108,6 +97,11 @@ double C[3][4] = {{0, 1, 0, 0}, {0, 0, 1, 0},  {0, 0, 0, 1}};
 // SFC gains
 double K[4][4] ={{-110.1768, -31.1393, 160.7503, 0}, {0, 0, 1, 10},  {0, 0, 0, 0},  {0, 0, 0, 0}};
 
+//steady state gain
+double Kp[4][4] ={{-1.3363, -6.8951, 18.2671, 0}, {0, 0, 1, 4},  {0, 0, 0, 0},  {0, 0, 0, 0}};
+
+
+double target[4] = [0; 0; 22/7; 0];
 
 // ENTER YOUR VALUES FOR THE OBSERVER GAINS HERE
 // observer gain just for theta and thetadot
