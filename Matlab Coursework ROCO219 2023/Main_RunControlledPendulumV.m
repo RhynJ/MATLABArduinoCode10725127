@@ -120,7 +120,7 @@ range=1;
 
 % use animate function
 step = 5;
-AnimatePendulumCart( xDataEst(3, :),  xDataEst(1, :), ((params.l)), tData, range, kickFlag, step, titleMessage);
+%AnimatePendulumCart( xDataEst(3, :),  xDataEst(1, :), ((params.l)), tData, range, kickFlag, step, titleMessage);
 
 
 % Plotting states

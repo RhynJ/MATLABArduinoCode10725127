@@ -10,11 +10,11 @@
 ///////////////////////////////////////////////////////////////
 // Author: Dr. Ian Howard
 // Associate Professor (Senior Lecturer) in Computational Neuroscience
-// Centre for Robotics and Neural Systems  
+// Centre for Robotics and Neural Systems 
 // Plymouth University
-// A324 Portland Square 
+// A324 Portland Square
 // PL4 8AA
-// Plymouth,   Devon,  UK
+// Plymouth,  Devon, UK
 // howardlab.com
 // 08/07/2017
 
@@ -98,17 +98,20 @@ double xxx = 0;
 
 // ENTER YOUR VALUES FOR THE SYSTEM MATRICES HERE
 // system matrix definitions
-double A[4][4] = {{xxx, xxx, xxx, xxx}, {xxx, xxx, xxx, xxx},  {xxx, xxx, xxx, xxx},  {xxx, xxx, xxx, xxx}};
-double B[4] = {xxx, xxx, xxx, xxx};
-double C[4] = {xxx, xxx, xxx, xxx};
+double A[4][4] = {{0, 1, 0, 0}, {-11.4961, -0.1431, 0, 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
+
+double B[4][4] = {{1.1719, 0, 0, 0}, {-0.1676, 0, 0, 0},  {1, 0, 0, 0},  {0, 1, 0, 0}};
+
+double C[3][4] = {{0, 1, 0, 0}, {0, 0, 1, 0},  {0, 0, 0, 1}};
 
 // ENTER YOUR VALUES FOR THE SFC GAINS HERE
 // SFC gains
-double K[4] = {xxx, xxx, xxx, xxx};
+double K[4][4] ={{-110.1768, -31.1393, 160.7503, 0}, {0, 0, 1, 10},  {0, 0, 0, 0},  {0, 0, 0, 0}};
+
 
 // ENTER YOUR VALUES FOR THE OBSERVER GAINS HERE
 // observer gain just for theta and thetadot
-double L[2] = {xxx, xxx};
+double L[3][4] = {{144.5039, 24.8569, 0, 0}, {0, 0, 11, 0},  {0, 0, 1, 10}};
 
 
 ////////////////////////////////////////////////////////////////

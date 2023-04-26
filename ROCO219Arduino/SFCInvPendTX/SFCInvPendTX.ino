@@ -9,11 +9,11 @@
 ///////////////////////////////////////////////////////////////
 // Author: Dr. Ian Howard
 // Associate Professor (Senior Lecturer) in Computational Neuroscience
-// Centre for Robotics and Neural Systems  
+// Centre for Robotics and Neural Systems 
 // Plymouth University
-// A324 Portland Square 
+// A324 Portland Square
 // PL4 8AA
-// Plymouth,   Devon,  UK
+// Plymouth,  Devon, UK
 // howardlab.com
 // 08/07/2017
 

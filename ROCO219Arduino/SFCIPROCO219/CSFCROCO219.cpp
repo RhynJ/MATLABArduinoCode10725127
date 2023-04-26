@@ -4,17 +4,7 @@
 // Runs on Arduino Mega
 // Implements observer based state feedback control with integral action
 // operates with stepper motor connected via A4988 controller
-///////////////////////////////////////////////////////////////
-// Author: Dr. Ian Howard
-// Associate Professor (Senior Lecturer) in Computational Neuroscience
-// Centre for Robotics and Neural Systems
-// Plymouth University
-// A324 Portland Square
-// PL4 8AA
-// Plymouth, Devon, UK
-// howardlab.com
 
-///////////////////////////////////////////////////////////////
 // state feedback controller with Luenberger observer
 // state update performed using Euler integration
 // See  p137
@@ -43,6 +33,9 @@
 
 #include <stdlib.h>
 #include "CSFCROCO219.h"
+
+unsigned long currentTime = 0;
+unsigned long previousTime = 0;
 
 ////////////////////////////////////////////////////////////////
 // construction passes system matrices, SFC and observer gains, as well as the setpoint location
@@ -103,24 +96,80 @@ void CSFCROCO219::InitSFC(unsigned long theTime)
 double CSFCROCO219::ComputeSFC(double y, unsigned long theTime)
 {
   // control value - stepper motor speed
-  double   u = 0.0;
+  double   u = 0;
   
   // PUT YOUR OWN ComputeSFC FUNCTIONALITY IN HERE
 
   // Calculate time since last update
+  double h = (double)(theTime - lastTime) / 1000.0;
 
   // compute control variable u
+  
+  
+  //u = -K*(x(1:4) - target) - Kp*(xhat(1:4) - target); % -K*(Xe)
+;
+
 
   // calculate observer correction term
 
+
+
   // update the state estimates for xHat
+
+
 
   // use control velocity from input to update position of cart
 
+
+
+
+
+
   // compute integral action positional error state update
+
+
 
   // record variables
 
   // return motor command
  return (u);
 }
+
+
+
+
+//ctrl = ctrb(A,B);
+// Mc = rank(ctrl);
+
+// %observability test
+// %Mo = [C; CA;]
+// observ = obsv(A,C);
+// Mo = rank(observ);
+
+// %calc the output 
+// %y = X(c-DK)
+// %there is no D matrix
+// y = C * x(1:4);
+// yHat =  C * xhat(1:4);
+
+// %what we want the system to do
+// target = [0; 0; pi; 0]; %we want everything to tend to 0 appart from the pendulum angle
+
+// %steady state gain 
+// Kp = place(A, B, [-4 -5 -6 -7]);
+
+
+// %this is the 2 gains 
+// u = -K*(x(1:4) - target) - Kp*(xhat(1:4) - target); % -K*(Xe)
+
+// % using the real states (just for comparison)
+// dx = A*x(1:4) + B*u;
+
+// % using the estimate states
+// % dx = Ax + Bu + L(y - yhat)
+// % L(y - yhat) = L(output - output estimate)
+// dxhatE = A*xhat(1:4) + B*u + L'*(y - yHat);
+
+// xDot = dx; %store the new dx for both the real and simulated 
+// xhatDot = dxhatE; %this is the estimated value 
+

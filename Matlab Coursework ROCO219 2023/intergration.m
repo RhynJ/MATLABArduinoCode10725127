@@ -33,7 +33,7 @@ Kp = place(A, B, [-4 -5 -6 -7]);
 
 
 %this is the 2 gains 
-u = -K*(x(1:4) - target) - Kp*(xhat(1:4) - target); % -K*(Xe)
+u = -K*(xhat(1:4) - target) - Kp*(x(1:4) - target); % -K*(Xe)
 
 % using the real states (just for comparison)
 dx = A*x(1:4) + B*u;
