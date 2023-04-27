@@ -31,5 +31,3 @@ else
     params.I = (1/3)*(params.m)*(params.lh^(2));   
     
 end
-
-

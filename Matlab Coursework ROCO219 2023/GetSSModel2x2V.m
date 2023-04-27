@@ -1,4 +1,4 @@
-function ssm = GetSSMode2x2V(wantDefault, params, c)
+function ssm = GetSSMode2x2(wantDefault, params, c)
 % get 2x2 state space model with thetaDot, theta as state variables
 
 % if default demo program values selected

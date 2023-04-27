@@ -6,6 +6,19 @@ function AnimatePendulumCart(thetaIn, xIn,  L, t, range, kickFlag, step, titleMe
 % t is the time array
 % kickFlag is true when a kick pertubation is applied at that tmeframe
 % titleMessage is the figure title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% largely based on youTube presentation by Steve Brunton
+% https://youtu.be/qjhAAQexzLg
+% Author: Dr. Ian Howard
+% Associate Professor (Senior Lecturer) in Computational Neuroscience
+% Centre for Robotics and Neural Systems
+% Plymouth University
+% A324 Portland Square
+% PL4 8AA
+% Plymouth, Devon, UK
+% howardlab.com
+% 23/01/2018
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % check lengths
 if( length(thetaIn) ~=  length(xIn))

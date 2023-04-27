@@ -1,3 +1,15 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% all rights reserved
+% Author: Dr. Ian Howard
+% Associate Professor (Senior Lecturer) in Computational Neuroscience
+% Centre for Robotics and Neural Systems
+% Plymouth University
+% A324 Portland Square
+% PL4 8AA
+% Plymouth, Devon, UK
+% howardlab.com
+% 10/02/2019
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % calculate non-linear Arduino suitable simulation of uncontrolled inverted pendulum
 
 close all
@@ -44,7 +56,7 @@ disp(ssm.D)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-titleMessage = 'Example Uncontrolled Inverted Pendulum: 10725127';
+titleMessage = 'Example Uncontrolled Inverted Pendulum: xxxYourIDHerexxx';
 disp(titleMessage)
 
 % initialize arrays

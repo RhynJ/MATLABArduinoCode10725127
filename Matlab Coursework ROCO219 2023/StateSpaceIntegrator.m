@@ -4,10 +4,21 @@ function [tout, xout] = StateSpaceIntegrator(VCPendDotCB, a1, a2, b0,  C, D, t, 
 % VCPendDotCB is the callback function to compute xDot 
 % a1, a2, b0 are coedfficients  
 % C, D are the state space model output matrices
-% K id the state feedback control gain - unused here
+% K id the state feedback control ggain - unused here
 % t is a vector of time samples
 % x0 is the initial state vector
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% all rights reserved
+% Author: Dr. Ian Howard
+% Associate Professor (Senior Lecturer) in Computational Neuroscience
+% Centre for Robotics and Neural Systems
+% Plymouth University
+% A324 Portland Square
+% PL4 8AA
+% Plymouth, Devon, UK
+% howardlab.com
+% 10/02/2019
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % get signal length
 len = length(t) -1;

@@ -1,20 +1,32 @@
-function [yhat,tout,xout] = SFCVLIA4x4(VCPendDotCB, a1, a2, b0, A, B, C, D, Ahat, K, L, t, xhat, maxSpeed)
+function [tout,xout] = SFCVLIA4x4(VCPendDotCB, c, ssmP, ssm, K, L, t, x0)
 % nonlinear simulate state space model using C-language compatible formuation
-% add real task pendulum code here
+% all rights reserved
+% Author: Dr. Ian Howard
+% Associate Professor (Senior Lecturer) in Computational Neuroscience
+% Centre for Robotics and Neural Systems
+% Plymouth University
+% A324 Portland Square
+% PL4 8AA
+% Plymouth, Devon, UK
+% howardlab.com
+% 23/01/2018
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% add real task pendulum code here
 % get signal length
 len = length(t) -1;
 
 % init output
-xout = zeros(2,len);
+xout = zeros(4,len);
 
 % record the initial state
 xout(:, 1) = x0;    %this is the input to the system
 x = x0; %set x to the system input
+xhat = x0; 
 
 % this is the control for the observer gain
-u = -L*x;
-      
+u = -K*xhat;
+
 % for all remaining data points, simulate state-space model using C-language compatible formulation
 for idx = 1:len
          
@@ -25,9 +37,9 @@ for idx = 1:len
     h = t(idx+1) - t(idx);
     
     % calculate state derivative from non-linear pendulum equations
-    xDot = VCPendDotCB(a1, a2, b0, x, u);
+    xDot = VCPendDotCB(c.a1, c.a2, c.b0, x, u);
     %this will calcualte the state derivitive for the predicted
-    xhatDot = VCPendDotCB(a1, a2, b0, xhat, u); 
+    xhatDot = VCPendDotCB(c.a1, c.a2, c.b0, xhat, u); 
 
     % update the state using Euler integration
     x(1) = x(1) + h * xDot(1);
@@ -37,7 +49,13 @@ for idx = 1:len
 
     xhat(1) = xhat(1) + h *xhatDot(1); %this is the observer for theta 
     xhat(2) = xhat(2) + h *xhatDot(2);  %this is the observer for thetaDot
-      
+    
+    y = ssmP.C * x;
+    
+    yhar = ssm.C * Xhat;
+
+    ycorr = L*(y - ssm.C * XHat);
+
     % record the state
     xout(:, idx) = x;
 
@@ -45,10 +63,6 @@ for idx = 1:len
     
         
 end
-
-
-
-
 
 
 

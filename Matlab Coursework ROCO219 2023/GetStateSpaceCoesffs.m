@@ -11,6 +11,10 @@ if(wantDefault)
     c.a2 = -25;
 else
   
+    % add real task pendulum values here
+    % .....
+
+
     % compute appropiate values here
     c.b0 = params.m*params.lh/(params.I+params.m*(params.lh^2));
     c.b1 = 0;
