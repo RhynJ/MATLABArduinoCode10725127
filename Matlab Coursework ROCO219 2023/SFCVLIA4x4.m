@@ -29,7 +29,8 @@ x = x0(1:4); %set x to the system input
 xhat = x0(1:2); 
 
 % this is the control for the observer gain
-u = -K*x;
+u = -K(1) * xhat(1) -K(2) * xhat(2) -K(3) * x(3) -K(4) * x(4);
+%this is in C++ form 
 
 % for all remaining data points, simulate state-space model using C-language compatible formulation
 for idx = 1:len
@@ -39,6 +40,12 @@ for idx = 1:len
 
     % get the duration between updates
     h = t(idx+1) - t(idx);
+
+
+    % this is the control for the observer gain
+    u = -K(1) * xhat(1) -K(2) * xhat(2) -K(3) * x(3) -K(4) * x(4);
+    %this is in C++ form 
+
     
     % calculate state derivative from non-linear pendulum equations
     xDot = VCPendDotCB(c.a1, c.a2, c.b0, x, u);

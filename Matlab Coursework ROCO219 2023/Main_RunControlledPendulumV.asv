@@ -45,7 +45,7 @@ ssm = GetSSModel2x2V(wantDefault, params, c);
 % calculate observer gain L here
 
 % put your code for calculating L here
-PX = [-8 -9];
+PX = [-5; -6];
 L = place(ssm.A, ssm.C', PX);
 
 
@@ -56,7 +56,7 @@ L = place(ssm.A, ssm.C', PX);
 
 % put your code for calculating K here
 
- KX =  [-1 -2 -3 -4];
+ KX =  [-2 -3 -4 -5];
  K = place(ssmP.A,ssmP.B, KX);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -84,7 +84,7 @@ for kick=1:10
 
     % add real task pendulum integration DFC loop here
     %this add some kind of force to try and push the pendulum over as well
-    x0 = [0; (0.3 * rand); 0.3; 0]; 
+    x0 = [0; 1 * (rand-); 0; 0]; 
     
     % call GetSSModel4x4V with appropriate parameters
     % run Euler integration
@@ -132,7 +132,7 @@ distance = xData(3, :);
 
 % use animate function
 step = 5;
-AnimatePendulumCart( (xData(1, :)+pi),  distance, 0.64, tData, range, kickFlag, step, titleMessage);
+AnimatePendulumCart( (xData(1, :)+pi),  distance, 0.6, tData, range, kickFlag, step, titleMessage);
 
 
 
