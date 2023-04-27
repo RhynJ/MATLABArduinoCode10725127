@@ -89,7 +89,7 @@ for kick=1:3
     
     % call GetSSModel4x4V with appropriate parameters
     % run Euler integration
-    [t, x] = SFCVLIA4x4(@CBNLVCPend, c, ssmP, ssm, K, L, t, x0);
+    [y, t, x] = SFCVLIA4x4(@CBNLVCPend, c, ssmP, ssm, K, L, t, x0);
 
     % get time
     newTime = (kick-1) * t(end) + t;
@@ -110,6 +110,7 @@ for kick=1:3
     % concatenate data between runs
     tData = [tData newTime];
     xData = [xData x];
+    yData = [yData y];
     kickFlag = [kickFlag kickFlagK];
 
 
@@ -128,7 +129,7 @@ figure
 range=1;
 
 % cart not moving so set distance to zero
-distance = zeros( size(xData(1, :)));
+distance = xData(3, :);
 
 % use animate function
 step = 5;

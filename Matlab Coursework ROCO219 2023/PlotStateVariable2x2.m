@@ -1,7 +1,7 @@
 function PlotStateVariable2x2(xDirect, time, titleMessage)
 % plot out the state variables
 
-minLen = nanmin([ length(xDirect) length(time)]);
+minLen = min([ length(xDirect) length(time)]);
 xDirect = xDirect(:,1:minLen);
 time = time(1:minLen);
 
