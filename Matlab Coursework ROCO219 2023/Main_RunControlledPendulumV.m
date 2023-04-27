@@ -119,7 +119,10 @@ end
 
 % add plot and animation here
 % plot out the state variables
-PlotStateVariable2x2(xData, tData, titleMessage);
+%PlotStateVariable2x2(xData, tData, titleMessage);
+%plot the outputs 
+plotStateVariable4x4(xData(1,:), xDataEst(1,:), xData(2,:), xDataEst(2,:), xData(3,:),xDataEst(3,:), xData(4,:), xDataEst(4,:),tData);
+
 
 % for all time point animate the results
 figure
@@ -132,5 +135,4 @@ distance = zeros( size(xData(1, :)));
 step = 5;
 AnimatePendulumCart( (xData(1, :) + pi),  distance, 0.6, tData, range, kickFlag, step, titleMessage);
 
-    
 
