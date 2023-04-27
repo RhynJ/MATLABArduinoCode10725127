@@ -19,9 +19,9 @@ else
     % .....
 
     % calculate appropiate values here
-    ssm.A = [0 1 0; ];   
-    ssm.B = [-c.a2 -c.a1 0; 0 0 0;];   
-    ssm.C = [1 0 0];
+    ssm.A = [0 1; -c.a2 -c.a1];   
+    ssm.B = [-c.b0 ;-c.a1*c.b0;];   
+    ssm.C = [1 0];
     ssm.D = 0;
 
 end

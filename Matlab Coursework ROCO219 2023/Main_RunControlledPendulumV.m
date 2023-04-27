@@ -31,7 +31,9 @@ c = GetStateSpaceCoesffs(wantDefault, params);
 % calculate observer gain L here
 
 %this is just a check can be removed later 
-ssmP = GetSSModel4x4V(params,c);
+ssmP = GetSSModel4x4V(c);
+ssm = GetSSModel2x2V(wantDefault, params, c);
+
 disp('ssmP.A')
 disp(ssmP.A)
 disp(' ')
@@ -48,7 +50,7 @@ disp(ssmP.D)
 
 % put your code for calculating L here
 PX = [-10 -11];
-L = place(ssmP.AObserve, ssmP.CObserve', PX);
+L = place(ssm.A, ssm.C', PX);
 
 disp(' ')
 disp('L')
@@ -59,36 +61,34 @@ disp(L)
 % calculate SFC gain K here
 
 % put your code for calculating K here
-
-K = place(ssmP.A,ssmP.B,[-10 -11 -12 -14]);
+KX = [-10 -11 -12 -14];
+K = place(ssmP.A,ssmP.B, KX');
 
 
 disp(' ')
 disp('K')
 disp(K)
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % setup time points
 dt =  0.0100;
 Tfinal = 5;
 t = 0:dt:Tfinal;
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 titleMessage = 'NLSimulateVelSFCLArduino4x4 partial observer Arduino';
 disp(titleMessage)
 
-% you can base this on the code in Main_RunDemoUncontrollerPendulumV.m
 
 %   initialize arrays
-xData = [];
+xData=[];
 yData=[];
 tData=[];
 kickFlag=[];
 
 
 % every sub-loop randomly perturb intial condition
-for kick=1:3 %3 might change 
+for kick=1:3 %3 differnet kicks 
         
     % for each run randomly perturb intial condition
     x0 = [0; 1 * (rand - 0.5); ]; %this add some kind of force to try and push the pendulum over 
