@@ -84,7 +84,7 @@ for kick=1:10
 
     % add real task pendulum integration DFC loop here
     %this add some kind of force to try and push the pendulum over as well
-    x0 = [0; (0.3 * rand); 0.3; 0]; 
+    x0 = [0; (1 * rand); 0; 0]; 
     
     % call GetSSModel4x4V with appropriate parameters
     % run Euler integration
