@@ -67,7 +67,7 @@ Encoder myEnc(encoderPinA, encoderPinB);
 // correction direction
 
 // positive for inverted pendulum
-double correctionDirection = 1;
+double correctionDirection = -1;
 
 // pendulum equilibrium positon 
 double equilibriumEncoderPostion = encoderResolution / 2;
@@ -100,7 +100,7 @@ double xxx = 0;
 
 // ENTER YOUR VALUES FOR THE SYSTEM MATRICES HERE
 // system matrix definitions
-double A[4][4] = {{0, 1, 0, 0}, {-13.1384, -0.6664, 0, 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
+double A[4][4] = {{0, 1, 0, 0}, {-18.9, -0.6664, 0, 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
 double B[4] = {1.3393, -(0.664*1.3393), 1, 0};
 double C[4] = {1, 0, 0, 0};
 
@@ -114,15 +114,20 @@ double C2[2] = {1, 0};
 // ENTER YOUR VALUES FOR THE SFC GAINS HERE
 // SFC gains
 
-//1 is the
-//2 is the 
-//3 is the 
-//4 is the 
-double K[4] = {-5, -6, -7, -8};
+
+
+
+//angle
+//angular velocity
+//cart position
+//error
+double K[4] = {3.6449,   -1.0168,    5.5522,    4.1333};
+//these need to be + as it smothes out the response
+
 
 // ENTER YOUR VALUES FOR THE OBSERVER GAINS HERE
 // observer gain just for theta and thetadot
-double L[2] = {-60, -70};
+double L[2] = {36.3336,  -23.1876};
 
 
 ////////////////////////////////////////////////////////////////

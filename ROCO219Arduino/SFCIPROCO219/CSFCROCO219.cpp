@@ -38,7 +38,7 @@ CSFCROCO219::CSFCROCO219(double A[][4], double A22[][2], double B[], double B2[]
   // use a rank 2 observer!
   this->L[0] = L[0];
   this->L[1] = L[1];
-
+  
   // for all rows
   for (int ridx = 0; ridx < rank; ridx++)
   {
@@ -103,7 +103,6 @@ double CSFCROCO219::ComputeSFC(double y, unsigned long theTime)
 {
   // control value - stepper motor speed
   double u = 0.0;
-  double yCorr;
 
   // Calculate time since last update
   // delta time in given in seconds
@@ -121,16 +120,22 @@ double CSFCROCO219::ComputeSFC(double y, unsigned long theTime)
   // calculate state derivative xhatdot and sum up
   xhat[0] +=  h * (A[0][0] * xhat[0] + A[0][1] * xhat[1] + B[0] * u + L[0] * yCorr );
   xhat[1] +=  h * (A[1][0] * xhat[0] + A[1][1] * xhat[1] + B[1] * u + L[1] * yCorr );
-  xhat[2] +=  h * (A[2][0] * xhat[0] + A[2][1] * xhat[1] + B[2] * u + K[0] * yCorr );
-  xhat[3] +=  h * (A[3][0] * xhat[0] + A[3][1] * xhat[1] + B[3] * u + K[1] * yCorr );
+  xhat[2] += h*(B[2]*u);
+  
+
+  xhatDot[0] += xhat[0] *h;
+  xhatDot[1] += xhat[1] *h;
 
 
 
   //  use control velocity from input to update position of cart
-  xhat[0] +=  h * ( B[0] * u );  
-  xhat[1] +=  h * ( B[1] * u );
-  xhat[2] +=  h * ( B[2] * u );
-  xhat[3] +=  h * ( B[3] * u );
+  //this is the x out
+  xdot[2] = u;
+  xdot[3] = x[2];
+
+
+  x[2] +=  h * ( B[2] * u );
+  x[3] +=  h * xdot[3];
   
   
   // record variables

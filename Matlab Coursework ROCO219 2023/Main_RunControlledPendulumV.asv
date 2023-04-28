@@ -45,20 +45,20 @@ ssm = GetSSModel2x2V(wantDefault, params, c);
 % calculate observer gain L here
 
 % put your code for calculating L here
-PX = [-18, -19];
+PX = [-8 -9];
 L = place(ssm.A, ssm.C', PX);
-disp(' ')
-disp('L')
-disp(L)
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % for state space model with thetaDot, theta and  position of cart
 % calculate SFC gain K here
 
- KX = [-2, -3, -3.1, -4.2];
+% put your code for calculating K here
+
+ %KX =  [-1 -2 -3 -4];
+ KX = [-1 -5 -10 -4]
  K = place(ssmP.A,ssmP.B, KX);
- disp(' ')
- disp('K')
- disp(K)
  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -134,7 +134,7 @@ distance = xData(3, :);
 
 % use animate function
 step = 5;
-%AnimatePendulumCart( (xData(1, :)+pi),  distance, 0.64, tData, range, kickFlag, step, titleMessage);
+AnimatePendulumCart( (xData(1, :)+pi),  distance, 0.64, tData, range, kickFlag, step, titleMessage);
 
 
 
