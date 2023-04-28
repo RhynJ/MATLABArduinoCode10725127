@@ -28,9 +28,7 @@ xout(:, 1) = x0;    %this is the input to the system
 x = x0(1:4); %set x to the system input
 xhat = x0(1:2); 
 
-% this is the control for the observer gain
-u = -K(1) * xhat(1) -K(2) * xhat(2) -K(3) * x(3) -K(4) * x(4);
-%this is in C++ form 
+
 
 % for all remaining data points, simulate state-space model using C-language compatible formulation
 for idx = 1:len
@@ -52,10 +50,10 @@ for idx = 1:len
     %this will calcualte the state derivitive for the predicted
 
     % update the state using Euler integration
-    x(1) = x(1) + h * xDot(1);
-    x(2) = x(2) + h * xDot(2);  
-    x(3) = x(3) + h * xDot(3);
-    x(4) = x(4) + h * xDot(4);
+    x(1) = x(1) + h * xDot(1); %
+    x(2) = x(2) + h * xDot(2); %this is 
+    x(3) = x(3) + h * xDot(3); %this is 
+    x(4) = x(4) + h * xDot(4); %this is
 
     %real
     y = ssmP.C * x;

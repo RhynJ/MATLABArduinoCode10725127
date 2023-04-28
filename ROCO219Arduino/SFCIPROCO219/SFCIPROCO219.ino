@@ -10,11 +10,11 @@
 ///////////////////////////////////////////////////////////////
 // Author: Dr. Ian Howard
 // Associate Professor (Senior Lecturer) in Computational Neuroscience
-// Centre for Robotics and Neural Systems  
+// Centre for Robotics and Neural Systems 
 // Plymouth University
-// A324 Portland Square 
+// A324 Portland Square
 // PL4 8AA
-// Plymouth,   Devon,  UK
+// Plymouth,  Devon, UK
 // howardlab.com
 // 08/07/2017
 
@@ -96,24 +96,38 @@ CStepper myStepper(stepPin, dirPin, enPin);
 // dummy value
 double xxx = 0;
 
+
+
 // ENTER YOUR VALUES FOR THE SYSTEM MATRICES HERE
 // system matrix definitions
-double A[4][4] = {{xxx, xxx, xxx, xxx}, {xxx, xxx, xxx, xxx},  {xxx, xxx, xxx, xxx},  {xxx, xxx, xxx, xxx}};
-double B[4] = {xxx, xxx, xxx, xxx};
-double C[4] = {xxx, xxx, xxx, xxx};
+double A[4][4] = {{0, 1, 0, 0}, {-13.1384, -0.6664, 0, 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
+double B[4] = {1.3393, -(0.664*1.3393), 1, 0};
+double C[4] = {1, 0, 0, 0};
+
+
+double A22[2][2] = {{0, 1} , {-13.1384, -0.6664}};
+
+double B2[2] = {-1.3393, -0.8926};
+
+double C2[2] = {1, 0};
 
 // ENTER YOUR VALUES FOR THE SFC GAINS HERE
 // SFC gains
-double K[4] = {xxx, xxx, xxx, xxx};
+
+//1 is the
+//2 is the 
+//3 is the 
+//4 is the 
+double K[4] = {-5, -6, -7, -8};
 
 // ENTER YOUR VALUES FOR THE OBSERVER GAINS HERE
 // observer gain just for theta and thetadot
-double L[2] = {xxx, xxx};
+double L[2] = {-60, -70};
 
 
 ////////////////////////////////////////////////////////////////
 // build the state feedback control object
-CSFCROCO219 mySFC( A, B, C, K, L, setPointAngle);
+CSFCROCO219 mySFC( A,A22, B,B2, C,C2, K, L, setPointAngle);
 
 ////////////////////////////////////////////////////////////////
 

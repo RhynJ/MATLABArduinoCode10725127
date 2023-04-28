@@ -56,7 +56,8 @@ L = place(ssm.A, ssm.C', PX);
 
 % put your code for calculating K here
 
- KX =  [-1 -2 -3 -4];
+ %KX =  [-1 -2 -3 -4];
+ KX = [-1 -5 -10 -4]
  K = place(ssmP.A,ssmP.B, KX);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -80,11 +81,11 @@ kickFlag=[];
 
 
 % every sub-loop randomly perturb intial condition
-for kick=1:10
+for kick=1:5
 
     % add real task pendulum integration DFC loop here
     %this add some kind of force to try and push the pendulum over as well
-    x0 = [0; (1 * rand); 0; 0]; 
+    x0 = [0; 1* ( rand - 1); 0; 0]; 
     
     % call GetSSModel4x4V with appropriate parameters
     % run Euler integration
