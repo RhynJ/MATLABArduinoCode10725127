@@ -19,6 +19,7 @@ set(h,'LineWidth', 3);
 h=legend('theta[rad]', 'x2[rad/s]');
 set(h,'FontSize', params.fontSize);
 
+
 % label the x-axis
 h = xlabel('Time [s]');
 set(h,'FontSize', params.fontSize);

@@ -7,8 +7,18 @@ function ssmP = GetSSModel4x4(c)
 % .....
 
 % compute valyes
-    ssmP.A = [0 1 0 0; -18.9 -0.9587 0 0; 0 0 0 0; 0 0 1 0;];   
-    ssmP.B = [c.b0; -c.a1*c.b0; 1; 0;];   
-    ssmP.C = [1 0 0 0;];
+    ssmP.A = [0 1 0 0;
+              -c.a2 -c.a1 0 0;
+              0 0 0 0;
+              0 0 1 0];   
+
+    ssmP.B = [c.b0;
+              -c.a1*c.b0; 
+              1; 
+              0];   
+
+    ssmP.C = [1 0 0 0];
+
+
     ssmP.D = 0;
     

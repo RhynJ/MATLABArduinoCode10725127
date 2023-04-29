@@ -23,7 +23,7 @@ class CSFCROCO219 {
   public:
 
     // constuctor to setup all matrices
-    CSFCROCO219(double A[][4], double A2[][2], double B[], double B2[],  double C[], double C2[], double K[], double L[], double setPointAngle);
+    CSFCROCO219(double A[][4], double B[], double C[], double K[], double L[], double setPointAngle);
     virtual ~CSFCROCO219();
 
     // init the timers
@@ -43,9 +43,6 @@ class CSFCROCO219 {
     double B[MAXRANK];
     double C[MAXRANK];
 
-    double A22[MAXRANK2][MAXRANK2];
-    double B2[MAXRANK2];
-    double C2[MAXRANK2];
 
     // rank of matrices
     int rank;

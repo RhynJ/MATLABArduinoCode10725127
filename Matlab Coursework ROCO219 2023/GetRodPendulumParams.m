@@ -25,9 +25,10 @@ else
 
     % put in approriate values here
     params.m = 0.314;
-    params.lh = 0.32;
+    params.lh = 0.32; %half langth
+    params.l = params.lh*2; %full length 
     params.g = -9.81;
     params.mu = 0.05;
-    params.I = (1/3)*(params.m)*((params.lh*2)^(2));   
+    params.I = (1/3)*(params.m)*(params.l^2)+(params.m)*(params.l^2);   
     
 end

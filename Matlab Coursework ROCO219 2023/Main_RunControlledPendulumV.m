@@ -26,7 +26,7 @@ wantDefault = 0;
 
 % get parameters for rod pendulum
 params = GetRodPendulumParams(wantDefault, 5);
-params
+
 
 % get state space coefficients
 c = GetStateSpaceCoesffs(wantDefault, params);
@@ -45,7 +45,7 @@ ssm = GetSSModel2x2V(wantDefault, params, c);
 % calculate observer gain L here
 
 % put your code for calculating L here
-PX = [-18, -19];
+PX = [-6, -7];
 L = place(ssm.A, ssm.C', PX);
 disp(' ')
 disp('L')
@@ -54,7 +54,7 @@ disp(L)
 % for state space model with thetaDot, theta and  position of cart
 % calculate SFC gain K here
 
- KX = [-2, -3, -3.1, -4.2];
+ KX = [-0.8, -2, -3, -  4];
  K = place(ssmP.A,ssmP.B, KX);
  disp(' ')
  disp('K')
@@ -82,11 +82,11 @@ kickFlag=[];
 
 
 % every sub-loop randomly perturb intial condition
-for kick=1:5
+for kick=1:3
 
     % add real task pendulum integration DFC loop here
     %this add some kind of force to try and push the pendulum over as well
-    x0 = [0; 1* ( rand - 1); 0; 0]; 
+    x0 = [0; 1* ( rand -1); 0; 0]; 
     
     % call GetSSModel4x4V with appropriate parameters
     % run Euler integration
@@ -121,12 +121,11 @@ end
 
 % add plot and animation here
 % plot out the state variables
-PlotStateVariable2x2(xData, tData, titleMessage);
  
 
 
 % for all time point animate the results
-figure
+
 range=1;
 
 % cart not moving so set distance to zero
@@ -134,8 +133,9 @@ distance = xData(3, :);
 
 % use animate function
 step = 5;
-%AnimatePendulumCart( (xData(1, :)+pi),  distance, 0.64, tData, range, kickFlag, step, titleMessage);
+AnimatePendulumCart( (xData(1, :)+pi),  distance, 0.64, tData, range, kickFlag, step, titleMessage);
 
+PlotStateVariable2x2(xData, tData, titleMessage);
 
 
 

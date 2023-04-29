@@ -100,8 +100,8 @@ double xxx = 0;
 
 // ENTER YOUR VALUES FOR THE SYSTEM MATRICES HERE
 // system matrix definitions
-double A[4][4] = {{0, 1, 0, 0}, {-18.9, -0.6664, 0, 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
-double B[4] = {1.3393, -(0.664*1.3393), 1, 0};
+double A[4][4] = {{0, 1, 0, 0}, {-4.8405, -0.2455, 0, 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
+double B[4] = {0.4934, -0.1212, 1, 0};
 double C[4] = {1, 0, 0, 0};
 
 
@@ -121,18 +121,18 @@ double C2[2] = {1, 0};
 //angular velocity
 //cart position
 //error
-double K[4] = {3.6449,   -1.0168,    5.5522,    4.1333};
+double K[4] = {-1.2651,-9.2824, 9.0541, 3.9666};
 //these need to be + as it smothes out the response
 
 
 // ENTER YOUR VALUES FOR THE OBSERVER GAINS HERE
 // observer gain just for theta and thetadot
-double L[2] = {36.3336,  -23.1876};
+double L[2] = {12.7545, -7.0299};
 
 
 ////////////////////////////////////////////////////////////////
 // build the state feedback control object
-CSFCROCO219 mySFC( A,A22, B,B2, C,C2, K, L, setPointAngle);
+CSFCROCO219 mySFC( A, B, C, K, L, setPointAngle);
 
 ////////////////////////////////////////////////////////////////
 

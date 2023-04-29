@@ -29,7 +29,7 @@
 
 ////////////////////////////////////////////////////////////////
 // construction passes system matrices, SFC and observer gains, as well as the setpoint location
-CSFCROCO219::CSFCROCO219(double A[][4], double A22[][2], double B[], double B2[],  double C[], double C2[], double K[], double L[], double setPointAngle) {
+CSFCROCO219::CSFCROCO219(double A[][4],  double B[], double C[], double K[], double L[], double setPointAngle) {
 
   // set rank for SFC
   rank = 4;
@@ -54,19 +54,6 @@ CSFCROCO219::CSFCROCO219(double A[][4], double A22[][2], double B[], double B2[]
   }
 
 
-
-  // for all rows
-  for (int ridx = 0; ridx < rank2; ridx++)
-  {
-    this->B2[ridx] = B2[ridx];
-    this->C2[ridx] = C2[ridx];
-
-    // for all columns
-    for (int cidx = 0; cidx < rank2; cidx++)
-    {
-      this->A22[ridx][cidx] = A22[ridx][cidx];
-    }
-  }
 
   this->setPointAngle = setPointAngle;
 
