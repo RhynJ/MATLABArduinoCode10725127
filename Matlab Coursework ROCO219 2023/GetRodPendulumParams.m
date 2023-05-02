@@ -20,15 +20,14 @@ if(wantDefault)
     params.I = 0;
     
 else
-    % add real task pendulum values here
-    % .....
+    
 
     % put in approriate values here
     params.m = 0.314;
     params.lh = 0.32; %half langth
     params.l = params.lh*2; %full length 
     params.g = -9.81;
-    params.mu = 0.05;
-    params.I = (1/3)*(params.m)*(params.l^2)+(params.m)*(params.l^2);   
+    params.mu = 0.05; 
+    params.I = (1/3)*(params.m)*(params.l^2);   %inertia
     
 end

@@ -56,7 +56,7 @@ disp(ssm.D)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-titleMessage = 'Example Uncontrolled Inverted Pendulum: xxxYourIDHerexxx';
+titleMessage = 'Example Uncontrolled Inverted Pendulum: 10725127';
 disp(titleMessage)
 
 % initialize arrays

@@ -59,9 +59,12 @@ class CSFCROCO219 {
 
     // state estimate
     double xhat[MAXRANK];
-    double x[MAXRANK];
     double xhatDot[MAXRANK];
     double yCorr;
+
+
+    //state actual 
+    double x[MAXRANK];
     double xdot[MAXRANK];
 
     // last time

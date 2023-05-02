@@ -92,42 +92,29 @@ double stepperPPR = 4 * 200;
 // contruct stepper motor control obkject
 CStepper myStepper(stepPin, dirPin, enPin);
 
-////////////////////////////////////////////////////////////////
-// dummy value
-double xxx = 0;
 
-
-
-// ENTER YOUR VALUES FOR THE SYSTEM MATRICES HERE
 // system matrix definitions
-double A[4][4] = {{0, 1, 0, 0}, {-4.8405, -0.2455, 0, 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
-double B[4] = {0.4934, -0.1212, 1, 0};
+// the valuse here have been calculated in MATLAB
+double A[4][4] = {{0, 1, 0, 0}, {13.1384,   -0.6664, 0 , 0},  {0, 0, 0, 0},  {0, 0, 1, 0}};
+double B[4] = {1.3393, -0.8926, 1, 0};
 double C[4] = {1, 0, 0, 0};
 
 
-double A22[2][2] = {{0, 1} , {-13.1384, -0.6664}};
-
-double B2[2] = {-1.3393, -0.8926};
-
-double C2[2] = {1, 0};
-
-// ENTER YOUR VALUES FOR THE SFC GAINS HERE
-// SFC gains
 
 
-
-
+//state representation 
 //angle
 //angular velocity
 //cart position
 //error
-double K[4] = {-1.2651,-9.2824, 9.0541, 3.9666};
+
+double K[4] = {16.9239, 4.2605, -7.7297, -5.2478};
 //these need to be + as it smothes out the response
 
 
 // ENTER YOUR VALUES FOR THE OBSERVER GAINS HERE
 // observer gain just for theta and thetadot
-double L[2] = {12.7545, -7.0299};
+double L[2] = {29.3336, 14.7346};
 
 
 ////////////////////////////////////////////////////////////////

@@ -95,7 +95,7 @@ double CSFCROCO219::ComputeSFC(double y, unsigned long theTime)
   // delta time in given in seconds
   double h = (double)(theTime - lastTime) / 1000.0;
 
-  // compute control variable u
+  // compute control variable u 
   u = -K[0] * xhat[0] -K[1] * xhat[1] -K[2] * xhat[2] - K[3] * xhat[3];
 
 
@@ -115,12 +115,12 @@ double CSFCROCO219::ComputeSFC(double y, unsigned long theTime)
 
 
 
-  //  use control velocity from input to update position of cart
-  //this is the x out
+  // use control velocity from input to update position of cart
+  //this is the x out this is the simulated 
   xdot[2] = u;
   xdot[3] = x[2];
 
-
+  //this is the real
   x[2] +=  h * ( B[2] * u );
   x[3] +=  h * xdot[3];
   
