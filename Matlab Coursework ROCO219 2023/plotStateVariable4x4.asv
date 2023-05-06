@@ -1,4 +1,5 @@
-function plotStateVariable4x4(xdata, xhatdata, xdotdata, xhatdotdata, thetadata,thetahatdata,thetadotdata, thetahatdotdata,timedata)
+function plotStateVariable4x4(xdata, xhatdata xdotdata, xhat
+    thetadata,thetadotdata, xhatdata,xhatdotdata,thetahatdata,thetahatdotdata,timedata)
 
 % Plot of states and state estimates
 
